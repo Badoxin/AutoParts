@@ -1,0 +1,1 @@
+export const categories = ['Frenos', 'Motor', 'Suspensión', 'Baterías', 'Llantas', 'Transmisión', 'Eléctrico', 'Enfriamiento'];
