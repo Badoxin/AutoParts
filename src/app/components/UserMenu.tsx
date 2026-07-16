@@ -1,19 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { User, LogIn, UserPlus, LogOut, Heart, ChevronDown } from 'lucide-react';
-import { AuthModal } from './AuthModal';
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
+import { User, LogIn, UserPlus, LogOut, ChevronDown, UserCircle, Scissors, Shield } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
-interface UserData {
-  name: string;
-  email: string;
-}
-
-export function UserMenu() {
+export function UserMenu({ onDark = false }: { onDark?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState<UserData | null>(null);
-  const [authOpen, setAuthOpen] = useState(false);
-  const [authView, setAuthView] = useState<'login' | 'registro'>('login');
   const menuRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const { user, logout, openLogin, openRegistro } = useAuth();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -25,96 +20,126 @@ export function UserMenu() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const openAuth = (view: 'login' | 'registro') => {
-    setAuthView(view);
-    setAuthOpen(true);
+  const handleLogout = () => {
+    logout();
     setIsOpen(false);
   };
 
-  const handleLogout = () => {
-    setUser(null);
+  const handleNav = (path: string) => {
     setIsOpen(false);
+    navigate(path);
+  };
+
+  const handleLogin = () => {
+    setIsOpen(false);
+    openLogin();
+  };
+
+  const handleRegistro = () => {
+    setIsOpen(false);
+    openRegistro();
   };
 
   return (
-    <>
-      <AuthModal
-        isOpen={authOpen}
-        onClose={() => setAuthOpen(false)}
-        initialView={authView}
-      />
+    <div className="relative" ref={menuRef}>
+      <button
+        onClick={() => setIsOpen(prev => !prev)}
+        className={`flex items-center gap-1.5 transition-colors ${
+          onDark ? 'text-white/90 hover:text-white' : 'text-muted-foreground hover:text-primary'
+        }`}
+      >
+        {user ? (
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+              <span className="text-foreground text-xs font-bold">{user.nombre.charAt(0).toUpperCase()}</span>
+            </div>
+            <ChevronDown className={`w-3 h-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+          </div>
+        ) : (
+          <User className="w-5 h-5" />
+        )}
+      </button>
 
-      <div className="relative" ref={menuRef}>
-        <button
-          onClick={() => setIsOpen(prev => !prev)}
-          className="flex items-center gap-1.5 text-gray-300 hover:text-orange-500 transition-colors"
+      <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -6, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -6, scale: 0.97 }}
+          transition={{ duration: 0.15, ease: 'easeOut' }}
+          className="absolute right-0 top-full mt-2 w-56 bg-card border border-border rounded-xl shadow-2xl z-50 overflow-hidden"
         >
           {user ? (
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs font-bold">{user.name.charAt(0)}</span>
-              </div>
-              <ChevronDown className={`w-3 h-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-            </div>
-          ) : (
-            <User className="w-5 h-5" />
-          )}
-        </button>
-
-        {isOpen && (
-          <div className="absolute right-0 top-full mt-2 w-56 bg-gray-900 border border-gray-700 rounded-xl shadow-2xl z-50 overflow-hidden">
-
-            {user ? (
-              <>
-                <div className="px-4 py-3 border-b border-gray-800">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center shrink-0">
-                      <span className="text-white font-bold">{user.name.charAt(0)}</span>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-white font-semibold text-sm truncate">{user.name}</p>
-                      <p className="text-gray-500 text-xs truncate">{user.email}</p>
-                    </div>
+            <>
+              <div className="px-4 py-3 border-b border-border">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center shrink-0">
+                    <span className="text-foreground font-bold">{user.nombre.charAt(0).toUpperCase()}</span>
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-foreground font-semibold text-sm truncate">{user.nombre}</p>
+                    <p className="text-muted-foreground text-xs truncate">{user.correo}</p>
                   </div>
                 </div>
+              </div>
 
-                <div className="border-t border-gray-800 py-1">
+              <div className="py-1">
+                {user.rol !== 'admin' && (
                   <button
-                    onClick={handleLogout}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 text-red-400 hover:text-red-300 hover:bg-gray-800 transition-colors text-sm"
+                    onClick={() => handleNav('/perfil')}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors text-sm"
                   >
-                    <LogOut className="w-4 h-4" />
-                    Cerrar Sesión
+                    <UserCircle className="w-4 h-4 text-primary" />
+                    Mi Perfil
                   </button>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="px-4 py-3 border-b border-gray-800">
-                  <p className="text-gray-400 text-xs">Inicia sesión para acceder a tu cuenta</p>
-                </div>
-                <div className="py-1">
+                )}
+                {user.rol === 'admin' && (
                   <button
-                    onClick={() => openAuth('login')}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 text-gray-300 hover:text-white hover:bg-gray-800 transition-colors text-sm"
+                    onClick={() => handleNav('/admin')}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors text-sm"
                   >
-                    <LogIn className="w-4 h-4 text-orange-500" />
-                    Iniciar Sesión
+                  <Shield className="w-4 h-4 text-primary" />
+                    Panel de Administrador
                   </button>
-                  <button
-                    onClick={() => openAuth('registro')}
-                    className="w-full flex items-center gap-3 px-4 py-2.5 text-gray-300 hover:text-white hover:bg-gray-800 transition-colors text-sm"
-                  >
-                    <UserPlus className="w-4 h-4 text-orange-500" />
-                    Registrarse
-                  </button>
-                </div>
-              </>
-            )}
+                )}
+              </div>
 
-          </div>
-        )}
-      </div>
-    </>
+              <div className="border-t border-border py-1">
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-primary hover:opacity-70 hover:bg-muted transition-colors text-sm"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Cerrar Sesión
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="px-4 py-3 border-b border-border">
+                <p className="text-muted-foreground text-xs">Inicia sesión para acceder a tu cuenta</p>
+              </div>
+              <div className="py-1">
+                <button
+                  onClick={handleLogin}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors text-sm"
+                >
+                  <LogIn className="w-4 h-4 text-primary" />
+                  Iniciar Sesión
+                </button>
+                <button
+                  onClick={handleRegistro}
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors text-sm"
+                >
+                  <UserPlus className="w-4 h-4 text-primary" />
+                  Registrarse
+                </button>
+              </div>
+            </>
+          )}
+        </motion.div>
+      )}
+      </AnimatePresence>
+    </div>
   );
 }

@@ -1,10 +1,23 @@
 body {
-  font-family: 'Barlow', sans-serif;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+/* Etiquetas pequeñas (ej. "Servicios", eyebrows de sección): sans ligera con
+   tracking amplio, para que solo los títulos lleven el toque itálico y no se
+   sature el diseño — el resto se queda quieto y delgado. */
+.eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  font-size: 0.7rem;
 }

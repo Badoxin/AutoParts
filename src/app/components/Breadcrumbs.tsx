@@ -15,7 +15,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
     <nav className="flex items-center space-x-2 text-sm">
       <Link
         to="/"
-        className="flex items-center gap-1.5 text-gray-400 hover:text-orange-500 transition-colors duration-200"
+        className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors duration-200"
       >
         <Home className="w-4 h-4" />
         <span>Inicio</span>
@@ -26,15 +26,15 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
 
         return (
           <div key={index} className="flex items-center space-x-2">
-            <ChevronRight className="w-4 h-4 text-gray-600" />
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
             {isLast ? (
-              <span className="text-gray-400 hover:text-orange-500 transition-colors duration-200 cursor-default">
+              <span className="text-muted-foreground hover:text-primary transition-colors duration-200 cursor-default">
                 {item.label}
               </span>
             ) : (
               <Link
                 to={item.href ?? '#'}
-                className="text-gray-400 hover:text-orange-500 transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 {item.label}
               </Link>

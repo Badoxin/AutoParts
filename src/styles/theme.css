@@ -2,80 +2,52 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
-  --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
-  --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
-  --destructive: #d4183d;
-  --destructive-foreground: #ffffff;
-  --border: rgba(0, 0, 0, 0.1);
+  /* Paleta tomada directamente del logo de Dayandi: cuadro morado, mechón
+     lila/rosado, fondo crema y texto café muy oscuro casi negro. */
+  --background: #FAF6EC;
+  --foreground: #2B2019;
+  --card: #FFFFFF;
+  --card-foreground: #2B2019;
+  --popover: #FFFFFF;
+  --popover-foreground: #2B2019;
+  --primary: #5C4A87;
+  --primary-foreground: #FAF6EC;
+  --secondary: #EADDF2;
+  --secondary-foreground: #5C4A87;
+  --muted: #F0E9DA;
+  --muted-foreground: #7C7166;
+  --accent: #F1E7F7;
+  --accent-foreground: #5C4A87;
+  --destructive: #B3432E;
+  --destructive-foreground: #FFFDF8;
+  --border: rgba(92, 74, 135, 0.16);
   --input: transparent;
-  --input-background: #f3f3f5;
-  --switch-background: #cbced4;
+  --input-background: #FFFFFF;
+  --switch-background: #EADDF2;
   --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #030213;
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  --font-weight-normal: 300;
+  --ring: #5C4A87;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* Acento único de la marca (el mechón lila del logo) — se usa a propósito
+     poco: precios, botones de acción principal, algún detalle puntual. No es
+     parte de la paleta de fondo/hover de todos los días. */
+  --highlight: #A263AC;
+  --highlight-foreground: #FFFDF8;
+
+  --chart-1: #A263AC;
+  --chart-2: #5C4A87;
+  --chart-3: #EADDF2;
+  --chart-4: #7C7166;
+  --chart-5: #F0E9DA;
+  --radius: 0.5rem;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #2B2019;
+  --sidebar-primary: #5C4A87;
+  --sidebar-primary-foreground: #FAF6EC;
+  --sidebar-accent: #F1E7F7;
+  --sidebar-accent-foreground: #5C4A87;
+  --sidebar-border: rgba(92, 74, 135, 0.16);
+  --sidebar-ring: #5C4A87;
 }
 
 @theme inline {
@@ -100,6 +72,8 @@
   --color-input-background: var(--input-background);
   --color-switch-background: var(--switch-background);
   --color-ring: var(--ring);
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -129,8 +103,9 @@
   }
 
   /**
-  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
-  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  * Estilos tipográficos base (h1-h4, p, label, button, input).
+  * Están en @layer base, así que las utilidades de Tailwind (text-sm, text-lg)
+  * los sobreescriben automáticamente cuando se necesita.
   */
 
   html {
@@ -140,42 +115,114 @@
   h1 {
     font-size: var(--text-2xl);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   h2 {
     font-size: var(--text-xl);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   h3 {
     font-size: var(--text-lg);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   h4 {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
   label {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-normal);
     line-height: 1.5;
   }
 
   button {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-normal);
     line-height: 1.5;
+    letter-spacing: 0.02em;
   }
 
   input {
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+  }
+}
+
+/* El sitio ahora es siempre claro (fondo crema, sin toggle de tema oscuro).
+   Sin esto, el <body> podría destellar en blanco puro durante las
+   transiciones de página en vez del crema de la marca. */
+html, body {
+  background-color: #FAF6EC;
+}
+
+/* ---------------------------------------------------------------------
+   Sistema de botones: el mismo lenguaje visual del CTA "Agendar Cita"
+   del hero (píldora + resplandor morado), graduado en 3 intensidades
+   según qué tan protagonista es la acción. Se usa en todo el sitio.
+   La excepción a propósito es "Ver Servicios" del hero, que se deja
+   con su estilo original.
+   --------------------------------------------------------------------- */
+@layer components {
+  /* Nivel 1 — acción principal de una pantalla (Guardar, Confirmar, Agendar) */
+  .btn-glow {
+    background-image: linear-gradient(90deg, var(--highlight), var(--primary));
+    color: var(--highlight-foreground);
+    border-radius: 9999px;
+    box-shadow: 0 4px 18px rgba(92, 74, 135, 0.32);
+    transition: box-shadow 0.25s ease, transform 0.2s ease, opacity 0.2s ease;
+  }
+  .btn-glow:hover:not(:disabled) {
+    box-shadow: 0 6px 24px rgba(162, 99, 172, 0.45);
+    transform: translateY(-1px);
+  }
+  .btn-glow:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  .btn-glow:disabled {
+    opacity: 0.55;
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  /* Nivel 2 — acción secundaria pero aún relevante (Cómo llegar, Crear cuenta) */
+  .btn-glow-outline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 1.5px solid var(--primary);
+    border-radius: 9999px;
+    transition: box-shadow 0.25s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+  .btn-glow-outline:hover:not(:disabled) {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    box-shadow: 0 6px 20px rgba(92, 74, 135, 0.3);
+  }
+
+  /* Nivel 3 — acción neutra (Atrás, Cancelar, Rechazar): mismo lenguaje,
+     mucho más discreto, para no competir con la acción principal de al lado */
+  .btn-glow-soft {
+    background-color: var(--card);
+    color: var(--muted-foreground);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    transition: box-shadow 0.25s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .btn-glow-soft:hover:not(:disabled) {
+    color: var(--primary);
+    border-color: rgba(92, 74, 135, 0.4);
+    box-shadow: 0 4px 14px rgba(92, 74, 135, 0.15);
+  }
+  .btn-glow-soft:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 }
